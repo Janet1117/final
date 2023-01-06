@@ -1,6 +1,8 @@
 #include<stdbool.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-#include "function.h"
+#include "node.h"
 
 //getopt使用
 #include<ctype.h>
