@@ -7,7 +7,7 @@
 #include"setupplayer.h"
 #include"function.h"
 #include"gamerule.h"
-#include"deal.h"
+#include"stack.h"
 
 #define R(card) "\033[1;31m"#card"\033[m" //紅色的牌
 #define Y(card) "\033[1;33m"#card"\033[m" //黃色的牌

@@ -3,7 +3,7 @@
 
 #include"mode.h"
 #include"cardfunction.h"
-#include"deal.h"
+#include"stack.h"
 #include"player.h"
 //#include"setupplayer.h"
 //#include"linkedlist.h"

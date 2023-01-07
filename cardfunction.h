@@ -3,7 +3,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include"node.h"
-#include"deal.h"
+#include"stack.h"
 #include"setupplayer.h"
 
 void SpecialCardFunction(node *player, int draw, int *PlayerOrder, int *OrderNumber, int playerAmount);

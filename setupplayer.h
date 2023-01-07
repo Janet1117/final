@@ -2,7 +2,7 @@
 #define SETUPPLAYER_H
 #include<time.h>
 #include"node.h"
-#include"deal.h"
+#include"stack.h"
 
 
 
