@@ -1,4 +1,9 @@
+#ifndef COMPUTERUSER_H
+#define COMPUTERUSER_H
+
 #include "function.h"
+#include <time.h>
+#include"stack.h"
 
 node *play;
 int switched = 0;
@@ -12,6 +17,7 @@ int bluecount = 0;
 //呼叫computeruser的function 
 node *computeruser(node *pokerpile, node **computerusercard, int *draw)
 {
+    *draw = 0;
     switched = 0;//判斷是否有可出的牌
     play = NULL;
     node *tmp;
@@ -35,8 +41,11 @@ node *computeruser(node *pokerpile, node **computerusercard, int *draw)
         node *tmpinsert;
         tmpinsert = (*computerusercard);
         //呼叫抽一張牌的函式 drawcard = 
-        drawcard->color = red;
-        drawcard->name = five;
+        node tmpcard;
+        tmpcard = pop();
+        drawcard = (node *)malloc(sizeof(node));
+        drawcard->color = tmpcard.color;
+        drawcard->name = tmpcard.name;
 
         //找最後一張 並新增
         while(tmpinsert->next != NULL)
@@ -45,7 +54,7 @@ node *computeruser(node *pokerpile, node **computerusercard, int *draw)
         }
         tmpinsert = insertafter(tmpinsert, makenode(drawcard));
         
-        printf("電腦玩家無牌可出，抽取一張牌\n");
+        //printf("電腦玩家無牌可出，抽取一張牌\n");
     }
     //有牌可以出的情況
     else
@@ -67,9 +76,17 @@ node *computeruser(node *pokerpile, node **computerusercard, int *draw)
         //刪掉電腦玩家手上的卡牌
         if(play->prev == NULL)//代表刪掉第一張
         {
-            (*computerusercard) = play->next;
-            (*computerusercard)->prev = NULL;
-            free(play);
+            if(play->next == NULL)//刪掉的是最後一張
+            {
+                (*computerusercard) = NULL;
+                free(play);
+            }
+            else
+            {
+                (*computerusercard) = play->next;
+                (*computerusercard)->prev = NULL;
+                free(play);
+            }
         }
         else if(play->next == NULL)//刪掉最後一張牌
         {
@@ -88,6 +105,9 @@ node *computeruser(node *pokerpile, node **computerusercard, int *draw)
     }
     return pokerpile;//回傳牌池的頭
 }
+
+
+
 
 /*void countcolor(int cardcolor)
 {
@@ -113,3 +133,6 @@ node *computeruser(node *pokerpile, node **computerusercard, int *draw)
     }
 }*/
 
+
+
+#endif

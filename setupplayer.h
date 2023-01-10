@@ -4,14 +4,7 @@
 #include"node.h"
 #include"stack.h"
 
-
-
-
-// void InitializeThreePlayerCard();
-// void InitializeFourPlayerCard();
-
-
-
+node *makelist(node *list);
 
 void ShuffleOrder(int *player_order, size_t amount);
 
@@ -21,34 +14,15 @@ node *player1 = NULL;//真人玩家手中的牌
 node *player2 = NULL;//電腦玩家手中的牌
 node *player3 = NULL;//電腦玩家手中的牌
 node *player4 = NULL;//電腦玩家手中的牌
-//node *players[4] = {player1, player2, player3, player4};
 
 
 node *makelist(node *list){
     if(list == NULL){
         list = (node *) malloc (sizeof(node));
+        list->next = list->prev = NULL;
     }
     return list;
 }
-
-// //初始化3人模式玩家手中的牌
-// void InitializeThreePlayerCard(){
-//     //每位玩家手中的牌，player1固定為真人玩家
-//     node *player1 = NULL;//真人玩家手中的牌
-//     node *player2 = NULL;//電腦玩家手中的牌
-//     node *player3 = NULL;//電腦玩家手中的牌
-// }
-
-// //初始化4人模式玩家手中的牌
-// void InitializeFourPlayerCard(){
-//     //每位玩家手中的牌，player1固定為真人玩家
-//     node *player1 = NULL;//真人玩家手中的牌
-//     node *player2 = NULL;//電腦玩家手中的牌
-//     node *player3 = NULL;//電腦玩家手中的牌
-//     node *player4 = NULL;//電腦玩家手中的牌
-// }
-
-
 
 
 //隨機出排順序
@@ -65,7 +39,5 @@ void ShuffleOrder(int *player_order, size_t amount){
         }
     }
 }
-
-
 
 #endif

@@ -13,24 +13,26 @@ node *UsedCard = NULL;//已出的牌
 node *cardpool = NULL;
 
 node SetCard(int color, int name);
-void SetUpdeck();
-void Shuffledeck(node deck[], size_t amount);
+void SetUpDeck();//設置108張牌並放入公用牌堆
+void ShuffleDeck(node deck[], size_t amount);//洗牌
 int empty();
 int full();
 void push(node data);
 node pop();
-node deal();
-void reshuffledeck();
+node deal();//發一張牌
+void reshuffledeck();//將已出的牌留最上面那張其他free，重新設置stack、洗牌
 
 node SetCard(int Color, int Name){
     node card;
     card.color = Color;
     card.name = Name;
     card.next = NULL;
+    card.prev = NULL;
     return card;
 }
 
-void SetUpdeck(){
+//設置108張牌並放入公用牌堆
+void SetUpDeck(){
     node data;
     //red, yellow, green, blue
     for(i = 1; i < 5; i++){
@@ -54,9 +56,11 @@ void SetUpdeck(){
         push(data);
         push(data);
     }
+    
 }
 
-void Shuffledeck(node deck[], size_t amount){
+//洗牌
+void ShuffleDeck(node deck[], size_t amount){
     srand(time(NULL));
     if(amount > 1){
         size_t x;
@@ -90,6 +94,7 @@ void push(node data){
         top++;
         stack[top] = data;
         stack[top].next = NULL;
+        stack[top].prev = NULL;
     }
 }
 
@@ -109,23 +114,21 @@ node deal(){
     return card;
 }
 
+//將已出的牌留最上面那張其他free，重新設置stack、洗牌
 void reshuffledeck(){
-    printf("hhhhh\n");
     while(UsedCard != NULL){
         if((UsedCard == NULL) || (UsedCard->next == NULL)){
-            printf("nnnnnnnnnn\n");
             break;
         }else{
-            printf("yyyyyyyyyy\n");
             node *nextptr;
             nextptr = UsedCard->next;
+            nextptr->next->prev = UsedCard;
             UsedCard->next = nextptr->next;
             free(nextptr);
         }
     }
-    printf("abcdefg\n");
-    SetUpdeck();
-    Shuffledeck(stack, 108);
+    SetUpDeck();
+    ShuffleDeck(stack, 108);
 }
 
 #endif
