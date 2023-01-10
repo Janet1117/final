@@ -1,4 +1,6 @@
 # uno
+## Compile
+## Run
 ## uno規則
 uno有108張牌，共有5種顏色、15種牌
 
