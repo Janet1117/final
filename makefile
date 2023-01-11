@@ -2,8 +2,9 @@ build = $(wildcard build/*.o)
 
 .PHONY: main
 
-main: main.o
-	gcc $(build) -o bin/main -lm
+uno: uno.o
+	gcc $(build) -o bin/uno -lm
 
-main.o:
-	gcc -c src/main.c -o build/main.o
+uno.o:
+	gcc -c src/uno.c -o build/uno.o
+	
