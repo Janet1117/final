@@ -172,6 +172,7 @@ void ThreePlayer(){
                 printf("\n%s抽了一張牌\n", P(玩家2));
                 StoreAct(2,cardpool, ifpass);//store存牌
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", P(玩家2));
                 PrintCard(cardpool);
                 printf("\n");
@@ -197,6 +198,7 @@ void ThreePlayer(){
                 printf("\n%s抽了一張牌\n", D(玩家3));
                 StoreAct(3,cardpool, ifpass);//store 存牌
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", D(玩家3));
                 PrintCard(cardpool);
                 printf("\n");
@@ -352,6 +354,7 @@ void FourPlayer(){
                 printf("\n%s抽了一張牌\n", P(玩家2));
                 StoreAct(2,cardpool, ifpass);//store
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", P(玩家2));
                 PrintCard(cardpool);
                 printf("\n");
@@ -377,6 +380,7 @@ void FourPlayer(){
                 printf("\n%s抽了一張牌\n", D(玩家3));
                 StoreAct(3,cardpool, ifpass);//store
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", D(玩家3));
                 PrintCard(cardpool);
                 printf("\n");
@@ -402,6 +406,7 @@ void FourPlayer(){
                 printf("\n%s抽了一張牌\n", W(玩家4));
                 StoreAct(4,cardpool, ifpass);//store
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", W(玩家4));
                 PrintCard(cardpool);
                 printf("\n");
