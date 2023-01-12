@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "stack.h": "c",
-        "player.h": "c"
+        "player.h": "c",
+        "time.h": "c",
+        "setupplayer.h": "c",
+        "typeinfo": "c",
+        "mode.h": "c"
     }
 }

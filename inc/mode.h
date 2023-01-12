@@ -30,7 +30,47 @@ int i, j;
 int WhoWin = -1;//誰獲勝 -1:遊戲繼續
 int count;
 
+//store 
+typedef struct record{
+	int order;//哪位玩家(真人玩家固定1)
+	int IFpass;//動作
+	node *card;
+	struct record *prev;
+	struct record *next;
+}Record;
 
+node StartCard;
+int RealPlayer[14];
+
+Record *head = NULL;
+Record *current = NULL;
+//store(order=玩家幾號,cur=要存的牌，ifpass->0為出牌,1為抽牌，2為被加牌)
+void StoreAct(int order, node *cur, int IFpass){
+    Record *tmp = (Record *)malloc(sizeof(Record));
+    node *card = (node *)malloc(sizeof(node));;
+    card->color = cur->color;
+    card->name = cur->name;
+    tmp->order = order;
+    tmp->IFpass = IFpass;
+    tmp->card = card;
+
+    if(current == NULL){
+		current = tmp;
+		head = tmp;
+		tmp->prev = NULL;
+		tmp->next = NULL;
+
+	}
+	else{
+		current -> next = tmp;
+
+		tmp->prev = current;
+		tmp->next = NULL;
+		
+		current = tmp;
+	}
+
+}
 
 //三人模式
 void ThreePlayer(){
@@ -70,6 +110,7 @@ void ThreePlayer(){
     system("clear");
     
     //遊戲設定
+     int ifpass=0;//store 初始為抽牌
     PlayerNumber = 3;
     RevserseOrNot = 0;
     int player_amount = (int) sizeof(three_player_order) / sizeof(three_player_order[0]);
@@ -97,6 +138,8 @@ void ThreePlayer(){
     }
     //設置底牌
     UsedCard = DrawOne(UsedCard);
+    StartCard.color = UsedCard->color;//store開局印底牌
+    StartCard.name = UsedCard->name;//store開局印底牌
     printf("底牌是: ");
     PrintCard(UsedCard);
     printf("\n");
@@ -125,11 +168,14 @@ void ThreePlayer(){
         else if(three_player_order[order] == 1){
             cardpool = computeruser(UsedCard, &player2, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store 抽牌
                 printf("\n%s抽了一張牌\n", P(玩家2));
+                StoreAct(2,cardpool, ifpass);//store存牌
             }else{
                 printf("\n%s出了", P(玩家2));
                 PrintCard(cardpool);
                 printf("\n");
+                StoreAct(2,cardpool, ifpass);//store存牌
             }
             UsedCard = cardpool;
             SpecialCardFunction(drawNumber, three_player_order, &order, PlayerNumber);
@@ -147,11 +193,14 @@ void ThreePlayer(){
         else if(three_player_order[order] == 2){
             cardpool = computeruser(UsedCard, &player3, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store 抽牌
                 printf("\n%s抽了一張牌\n", D(玩家3));
+                StoreAct(3,cardpool, ifpass);//store 存牌
             }else{
                 printf("\n%s出了", D(玩家3));
                 PrintCard(cardpool);
                 printf("\n");
+                StoreAct(3,cardpool, ifpass);//store 存牌
             }
             UsedCard = cardpool;
             SpecialCardFunction(drawNumber, three_player_order, &order, PlayerNumber);
@@ -239,6 +288,7 @@ void FourPlayer(){
     system("clear");
 
     //遊戲設定
+    int ifpass=0;//store初始化抽牌
     PlayerNumber = 4;
     RevserseOrNot = 0;
     int player_amount = (int) sizeof(four_player_order) / sizeof(four_player_order[0]);
@@ -269,6 +319,8 @@ void FourPlayer(){
     }
     //設置底牌
     UsedCard = DrawOne(UsedCard);
+    StartCard.color = UsedCard->color;//store
+    StartCard.name = UsedCard->name;//store
     printf("底牌是: ");
     PrintCard(UsedCard);
     printf("\n");
@@ -296,11 +348,14 @@ void FourPlayer(){
         else if(four_player_order[order] == 1){
             cardpool = computeruser(UsedCard, &player2, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store
                 printf("\n%s抽了一張牌\n", P(玩家2));
+                StoreAct(2,cardpool, ifpass);//store
             }else{
                 printf("\n%s出了", P(玩家2));
                 PrintCard(cardpool);
                 printf("\n");
+                StoreAct(2,cardpool, ifpass);//store
             }
             UsedCard = cardpool;
             SpecialCardFunction(drawNumber, four_player_order, &order, PlayerNumber);
@@ -318,11 +373,14 @@ void FourPlayer(){
         else if(four_player_order[order] == 2){
             cardpool = computeruser(UsedCard, &player3, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store
                 printf("\n%s抽了一張牌\n", D(玩家3));
+                StoreAct(3,cardpool, ifpass);//store
             }else{
                 printf("\n%s出了", D(玩家3));
                 PrintCard(cardpool);
                 printf("\n");
+                StoreAct(3,cardpool, ifpass);//store
             }
             UsedCard = cardpool;
             SpecialCardFunction(drawNumber, four_player_order, &order, PlayerNumber);
@@ -340,11 +398,14 @@ void FourPlayer(){
         else if(four_player_order[order] == 3){
             cardpool = computeruser(UsedCard, &player4, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store
                 printf("\n%s抽了一張牌\n", W(玩家4));
+                StoreAct(4,cardpool, ifpass);//store
             }else{
                 printf("\n%s出了", W(玩家4));
                 PrintCard(cardpool);
                 printf("\n");
+                StoreAct(4,cardpool, ifpass);//store
             }
             UsedCard = cardpool;
             SpecialCardFunction(drawNumber, four_player_order, &order, PlayerNumber);
@@ -439,6 +500,16 @@ void SetupThreePlayerCard(){
         player2 = DrawOne(player2);
         player3 = DrawOne(player3);
     }
+    //store存真人玩家一開始的手牌
+    if(RealPlayer[0] == -1){
+        node *tmp;
+        tmp = player1;
+        for(int i = 0; i < 7; ++i){
+            RealPlayer[i*2] = tmp->color;
+            RealPlayer[i*2+1] = tmp->name;
+            tmp = tmp ->next;
+        }
+    }
 }
 
 //開局一人7張牌
@@ -448,6 +519,16 @@ void SetupFourPlayerCard(){
         player2 = DrawOne(player2);
         player3 = DrawOne(player3);
         player4 = DrawOne(player4);
+    }
+    //store存真人玩家一開始的手牌
+    if(RealPlayer[0] == -1){
+        node *tmp;
+        tmp = player1;
+        for(int i = 0; i < 7; ++i){
+            RealPlayer[i*2] = tmp->color;
+            RealPlayer[i*2+1] = tmp->name;
+            tmp = tmp ->next;
+        }
     }
 }
 
