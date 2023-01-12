@@ -4,7 +4,6 @@
 #include "function.h"
 #include <time.h>
 #include"stack.h"
-#include "setupplayer.h"
 
 node *play;
 int switched = 0;
