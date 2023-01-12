@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
 				char data[50];
 				char color[50], name[50];
 				fseek(fptr, SEEK_SET, 0);
-				printf("載入紀錄\n");
+				printf("載入\033[1;37m %s \033[m紀錄\n", filename);
 				fscanf(fptr,"%s\n", data);
 				if(atoi(data)== 3){
 					printf("三人局\n");
@@ -185,16 +185,16 @@ int main(int argc, char **argv) {
 							if(flag == 51 /*black*/){
 								printf("玩家選擇顏色:");
 								if(atoi(color) == yellow){
-									printf("黃\n");
+									printf("%s\n",Y(yellow));
 								}
 								else if(atoi(color) == red){
-									printf("紅\n");
+									printf("%s\n", R(red));
 								}
 								else if(atoi(color) == green){
-									printf("綠\n");
+									printf("%s\n", G(green));
 								}
 								else if(atoi(color) == blue){
-									printf("藍\n");
+									printf("%s\n", B(blue));
 								}
 
 						}
