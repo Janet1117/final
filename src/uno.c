@@ -209,41 +209,42 @@ int main(int argc,char *argv[]){
 				printf("你贏了\n");
 			}
 			
-		}
-		else if(ID == 2){
-			if( flag == 49 )
-				printf("玩家2抽了一張牌\n");
-			else{
-				printf("usedCard :");
-				tmp.color = atoi(color);
-				tmp.name = atoi(name);
-				PrintCard(&tmp);
-				printf("\n");
+			}
+			else if(ID == 2){
+				if( flag == 49 )
+					printf("玩家2抽了一張牌\n");
+				else{
+					printf("usedCard :");
+					tmp.color = atoi(color);
+					tmp.name = atoi(name);
+					PrintCard(&tmp);
+					printf("\n");
+				}
+			}
+			else if(ID == 3){
+				if( flag == 49 )
+					printf("玩家3抽了一張牌\n");
+				else{
+					printf("usedCard :");
+					tmp.color = atoi(color);
+					tmp.name = atoi(name);
+					PrintCard(&tmp);
+					printf("\n");
+				}
+			}
+			else if(ID == 4){
+				if( flag == 49 )
+					printf("玩家4抽了一張牌\n");
+				else{
+					printf("usedCard :");
+					tmp.color = atoi(color);
+					tmp.name = atoi(name);
+					PrintCard(&tmp);
+					printf("\n");
+				}
 			}
 		}
-		else if(ID == 3){
-			if( flag == 49 )
-				printf("玩家3抽了一張牌\n");
-			else{
-				printf("usedCard :");
-				tmp.color = atoi(color);
-				tmp.name = atoi(name);
-				PrintCard(&tmp);
-				printf("\n");
-			}
-		}
-		else if(ID == 4){
-			if( flag == 49 )
-				printf("玩家4抽了一張牌\n");
-			else{
-				printf("usedCard :");
-				tmp.color = atoi(color);
-				tmp.name = atoi(name);
-				PrintCard(&tmp);
-				printf("\n");
-			}
-		}
-		}
+		printf("遊戲結束！\n");
 	}
 	fclose(fptr);
 	return 0;

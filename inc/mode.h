@@ -130,9 +130,11 @@ void ThreePlayer(){
             ComputerCurrentCard(player2);
             cardpool = computeruser(UsedCard, &player2, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store
                 printf("\n%s抽了一張牌\n", P(玩家2));
                 StoreAct(2,cardpool, ifpass);//store存牌
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", P(玩家2));
                 PrintCard(cardpool);
                 printf("\n");
@@ -164,9 +166,11 @@ void ThreePlayer(){
             ComputerCurrentCard(player3);
             cardpool = computeruser(UsedCard, &player3, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store
                 printf("\n%s抽了一張牌\n", D(玩家3));
                 StoreAct(3,cardpool, ifpass);//store 存牌
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", D(玩家3));
                 PrintCard(cardpool);
                 printf("\n");
@@ -325,9 +329,11 @@ void FourPlayer(){
         else if(four_player_order[order] == 1){
             cardpool = computeruser(UsedCard, &player2, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store
                 printf("\n%s抽了一張牌\n", P(玩家2));
                 StoreAct(2,cardpool, ifpass);//store
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", P(玩家2));
                 PrintCard(cardpool);
                 printf("\n");
@@ -352,9 +358,11 @@ void FourPlayer(){
         else if(four_player_order[order] == 2){
             cardpool = computeruser(UsedCard, &player3, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store
                 printf("\n%s抽了一張牌\n", D(玩家3));
                 StoreAct(3,cardpool, ifpass);//store
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", D(玩家3));
                 PrintCard(cardpool);
                 printf("\n");
@@ -379,9 +387,11 @@ void FourPlayer(){
         else if(four_player_order[order] == 3){
             cardpool = computeruser(UsedCard, &player4, &drawNumber);
             if(cardpool == UsedCard){
+                ifpass=1;//store
                 printf("\n%s抽了一張牌\n", W(玩家4));
                 StoreAct(4,cardpool, ifpass);//store
             }else{
+                ifpass=0;//store
                 printf("\n%s出了", W(玩家4));
                 PrintCard(cardpool);
                 printf("\n");
@@ -448,6 +458,7 @@ void initialize(){
     node *player4 = NULL;//電腦玩家手中的牌
     node *UsedCard = NULL;//已出的牌
     node *cardpool = NULL;
+    RealPlayer[0] = -1; //store 
     input = makelist(input);
 }
 
