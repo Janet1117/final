@@ -100,6 +100,8 @@ void ThreePlayer(){
     }
     //設置底牌
     UsedCard = DrawOne(UsedCard);
+    StartCard.color = UsedCard->color;//store
+    StartCard.name = UsedCard->name;//store
     printf("底牌是: ");
     PrintCard(UsedCard);
     printf("\n");
@@ -276,7 +278,7 @@ void FourPlayer(){
     RevserseOrNot = 0;
     int player_amount = (int) sizeof(four_player_order) / sizeof(four_player_order[0]);
     
-    void initialize();
+    initialize();
     count = 0;
 
     //打亂順序
@@ -302,6 +304,8 @@ void FourPlayer(){
     }
     //設置底牌
     UsedCard = DrawOne(UsedCard);
+    StartCard.color = UsedCard->color;//store
+    StartCard.name = UsedCard->name;//store
     printf("底牌是: ");
     PrintCard(UsedCard);
     printf("\n");
