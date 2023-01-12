@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#include "../inc/node.h"
+#include "../inc/store.h"
 #include "../inc/mode.h"
 //getopt使用
 #include<ctype.h>
